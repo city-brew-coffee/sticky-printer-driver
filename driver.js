@@ -16,7 +16,7 @@ var db = admin.firestore();
     ("0" + dt.getDate()).slice(-2) + 'T' +
     ("0" + dt.getHours()).slice(-2) + ':' +
     ("0" + dt.getMinutes()).slice(-2) + ':' +
-    ("0" + (dt.getSeconds())).slice(-2) +'-06:00';
+    ("0" + (dt.getSeconds())).slice(-2) + 'Z';
     console.log(date);
     const options = {
       url: 'https://connect.squareup.com/v1/YWX343F40AM19/payments?begin_time=' + date,
