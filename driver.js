@@ -1,9 +1,11 @@
-const escpos = require('escpos');
 const request = require('request');
+const admin = require('firebase-admin');
 
-const debugDevice = new escpos.Console();
-const printerOptions = { encoding: "GB18030" /* default */ }
-const printer = new escpos.Printer(debugDevice, printerOptions);
+admin.initializeApp({
+  credential: admin.credential.applicationDefault()
+});
+
+var db = admin.firestore();
 
 (function loop() {
   setTimeout(function () {
@@ -15,7 +17,7 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
     ("0" + dt.getHours()).slice(-2) + ':' +
     ("0" + dt.getMinutes()).slice(-2) + ':' +
     ("0" + (dt.getSeconds())).slice(-2) +'-06:00';
-    // console.log(date);
+    console.log(date);
     const options = {
       url: 'https://connect.squareup.com/v1/YWX343F40AM19/payments?begin_time=' + date,
       headers: {
@@ -33,11 +35,7 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
             //console.log("Item " + itemIndex);
             var itemObj = orderObj.itemizations[itemIndex];
 
-            var modifiers = "";
-            for(var modifierIndex = 0; modifierIndex < itemObj.modifiers.length; modifierIndex++) {
-              var modifier = itemObj.modifiers[modifierIndex];
-              modifiers = modifiers + "  - " + modifier.name + "\n";
-            }
+            var modifiers = itemObj.modifiers.map((item) => item.name);
 
             for(var numOfDrinks = 0; numOfDrinks < parseInt(itemObj.quantity); numOfDrinks++){
               var labelObj = {
@@ -45,26 +43,12 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
                 modifiers: modifiers,
                 size: itemObj.item_variation_name
               };
-              printLabel(labelObj);
+              db.collection('items').doc('YWX343F40AM19').create(labelObj);
             }
           }
         }
       }
     });
-
-    function printLabel(obj) {
-      console.log("\n--------------------\n")
-      console.log(obj.size + " " + obj.title);
-      console.log(obj.modifiers)
-
-      console.log("--------------------\n")
-      // debugDevice.open(function() {
-      //   printer
-      //   .text(obj.title)
-      //   .cut()
-      //   .close();
-      // });
-    }
 
     loop()
   }, 2000);
