@@ -43,7 +43,11 @@ var db = admin.firestore();
                 modifiers: modifiers,
                 size: itemObj.item_variation_name
               };
-              db.collection('items').doc('YWX343F40AM19').create(labelObj);
+              db.collection('items').doc('items').collection('YWX343F40AM19').add(labelObj).then((ref) => {
+                console.log('Added document with ID: ', ref.id);
+              }).catch((err) => {
+                console.error(err);
+              });
             }
           }
         }
