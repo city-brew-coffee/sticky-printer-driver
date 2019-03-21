@@ -29,10 +29,10 @@ var db = admin.firestore();
       var obj = JSON.parse(body);
       if (obj.length !== 0) {
         for (var orderIndex=0; orderIndex<obj.length; orderIndex++){
-          //console.log("Order " + orderIndex);
+          console.log("Order " + orderIndex);
           var orderObj = obj[orderIndex];
           for(var itemIndex = 0; itemIndex < orderObj.itemizations.length; itemIndex++) {
-            //console.log("Item " + itemIndex);
+            console.log("Item " + itemIndex);
             var itemObj = orderObj.itemizations[itemIndex];
 
             var modifiers = itemObj.modifiers.map((item) => item.name);
