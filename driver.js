@@ -7,14 +7,15 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
 
 (function loop() {
   setTimeout(function () {
-    var dt = new Date();
+    var currentDt = new Date();
+    var dt = new Date(currentDt.getTime() - 2000)
     var date = dt.getFullYear() + '-' +
     ("0" + (dt.getMonth()+1)).slice(-2) + '-' +
     ("0" + dt.getDate()).slice(-2) + 'T' +
     ("0" + dt.getHours()).slice(-2) + ':' +
     ("0" + dt.getMinutes()).slice(-2) + ':' +
-    ("0" + (dt.getSeconds()-3)).slice(-2) +'-06:00';
-    //console.log(date);
+    ("0" + (dt.getSeconds())).slice(-2) +'-06:00';
+    // console.log(date);
     const options = {
       url: 'https://connect.squareup.com/v1/YWX343F40AM19/payments?begin_time=' + date,
       headers: {
