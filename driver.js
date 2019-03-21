@@ -24,7 +24,7 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
 
     request(options, function (error, response, body) {
       var obj = JSON.parse(body);
-      if (obj.length != 0) {
+      if (obj.length !== 0) {
         for (var orderIndex=0; orderIndex<obj.length; orderIndex++){
           //console.log("Order " + orderIndex);
           var orderObj = obj[orderIndex];
@@ -38,12 +38,14 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
               modifiers = modifiers + "  - " + modifier.name + "\n";
             }
 
-            var labelObj = {
-              title: itemObj.name,
-              quantity: parseInt(itemObj.quantity),
-              modifiers: modifiers,
-            };
-            printLabel(labelObj);
+            for(var numOfDrinks = 0; numOfDrinks < parseInt(itemObj.quantity); numOfDrinks++){
+              var labelObj = {
+                title: itemObj.name,
+                modifiers: modifiers,
+                size: itemObj.item_variation_name
+              };
+              printLabel(labelObj);
+            }
           }
         }
       }
@@ -51,10 +53,10 @@ const printer = new escpos.Printer(debugDevice, printerOptions);
 
     function printLabel(obj) {
       console.log("\n--------------------\n")
-      console.log(obj.quantity + " " + obj.title);
+      console.log(obj.size + " " + obj.title);
       console.log(obj.modifiers)
 
-      console.log("\n--------------------\n")
+      console.log("--------------------\n")
       // debugDevice.open(function() {
       //   printer
       //   .text(obj.title)
