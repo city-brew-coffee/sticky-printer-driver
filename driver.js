@@ -51,7 +51,7 @@ var lastDate;
                 title: itemObj.name,
                 modifiers: modifiers,
                 size: itemObj.item_variation_name,
-                time: itemObj.created_at,
+                time: orderObj.created_at,
                 bumped: false
               };
               db.collection('items').doc('items').collection('YWX343F40AM19').add(labelObj).then((ref) => {
