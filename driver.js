@@ -32,7 +32,7 @@ var lastDate;
       }
     };
 
-    var currentDt = new Date().toISOString();
+    lastDate = new Date().toISOString();
 
     request(options, function (error, response, body) {
       var obj = JSON.parse(body);
