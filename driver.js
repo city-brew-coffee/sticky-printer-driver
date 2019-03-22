@@ -50,7 +50,8 @@ var lastDate;
                 modifiers: modifiers,
                 size: itemObj.item_variation_name,
                 time: orderObj.created_at,
-                bumped: false
+                bumped: false,
+                printed: false
               };
               db.collection('items').doc('items').collection('YWX343F40AM19').add(labelObj).then((ref) => {
                 console.log('Added document with ID: ', ref.id);
