@@ -64,7 +64,7 @@ var lastDate;
       }
     });
 
-    lastDate = new Date((new Date()).getTime() - 1000).toISOString();
+    lastDate = new Date((new Date()).getTime() - 1700).toISOString();
 
     loop()
   }, 2000);
