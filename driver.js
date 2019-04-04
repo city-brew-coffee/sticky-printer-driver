@@ -28,7 +28,7 @@ var lastDate;
     const options = {
       url: url,
       headers: {
-        'Authorization': 'Bearer sq0atp-ZZt4RfHILmH2Bx3jqHXR5g'
+        'Authorization': 'Bearer EAAAEF6M57K-wC3WrDFaDW80jMZ8KHNCzBbFVWtmg0bZifLJ3XVdcJGta7OgaLuS'
       }
     };
 
