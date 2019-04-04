@@ -23,10 +23,10 @@ var lastDate;
       var dt = new Date(currentDt.getTime() - 3000)
       lastDate = dt.toISOString();
     }
-
-    console.log(lastDate, new Date().toISOString());
+    var url = 'https://connect.squareup.com/v1/' + locationId + '/payments?begin_time=' + lastDate;
+    console.log(lastDate, new Date().toISOString(), url );
     const options = {
-      url: 'https://connect.squareup.com/v1/'+ locationId + '/payments?begin_time=' + lastDate,
+      url: url,
       headers: {
         'Authorization': 'Bearer sq0atp-ZZt4RfHILmH2Bx3jqHXR5g'
       }
@@ -65,7 +65,7 @@ var lastDate;
       }
     });
 
-    lastDate = new Date((new Date()).getTime() - 500).toISOString();
+    lastDate = new Date((new Date()).getTime() - 5000).toISOString();
 
     loop()
   }, 2000);
