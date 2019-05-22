@@ -1,0 +1,16 @@
+{
+  "name": "knative-square-kds-driver",
+  "version": "1.0.0",
+  "description": "Driver for Custom Square KDS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js YWX343F40AM19"
+  },
+  "author": "Marcus Twichel",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "firebase-admin": "^7.4.0",
+    "request": "^2.88.0",
+    "rxjs": "^6.5.2"
+  }
+}
